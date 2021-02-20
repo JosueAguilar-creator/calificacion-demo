@@ -37,7 +37,7 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
 
-    @GetMapping(path = "report/columns/{score_id}")
+    @GetMapping(path = "score/{score_id}")
     public ScoreEntity findScoreByScoreId(@PathVariable("score_id") int score_id) {
         return scoreRepository.findByScoreId(score_id);
     }
@@ -60,7 +60,7 @@ public class ScoreServiceImpl implements ScoreService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_XML);
-        headers.setContentDispositionFormData(pathName, scoreEntity.getStudent_code()+".xml");
+        headers.setContentDispositionFormData(pathName, scoreEntity.getStudent_code()+"_"+scoreEntity.getClave_materia()+".xml");
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 
         byte[] content = Files.readAllBytes(new File(pathName).toPath());
